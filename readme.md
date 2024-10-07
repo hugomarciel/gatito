@@ -1,5 +1,5 @@
 # GATO 
-# Redes de computadores
+# Redes de computadores - USACH
 # Integrantes: Carlos Gutierrez - Hugo Marciel
 # Ejecutar en este orden:
 
