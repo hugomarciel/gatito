@@ -1,4 +1,3 @@
-
 import socket
 import pickle
 
@@ -16,7 +15,6 @@ server.listen()
 print(f"Servidor Intermediario: En ejecución en {HOST}:{PORT}")
 
 def check_winner(symbol):
-    # Comprobación de filas, columnas y diagonales para el símbolo dado
     for row in table:
         if all(s == symbol for s in row):
             return True
@@ -34,7 +32,6 @@ def insert_move(symbol, row, col):
     return False
 
 def send_gato_move():
-    # Conectar al Servidor Gato y solicitar una jugada
     gato_conn = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     gato_conn.sendto(b"Jugar", (HOST, PORT_GATO))
     data, _ = gato_conn.recvfrom(1024)
