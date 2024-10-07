@@ -1,4 +1,6 @@
-# GATO
+# GATO 
+# Redes de computadores
+# Integrantes: Carlos Gutierrez - Hugo Marciel
 # Ejecutar en este orden:
 
 
