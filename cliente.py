@@ -4,7 +4,7 @@ import pickle
 HOST = "localhost"
 PORT = 8000
 MESSAGE_MAIN_MENU = """
---------- Bienvenido al Juego Tres en Línea ---------
+--------- Bienvenido al Juego Gato ---------
 Selecciona una opción para jugar:
     1. Jugar
     2. Salir
@@ -12,10 +12,12 @@ Selecciona una opción para jugar:
 MESSAGE_ENTER_MOVE = "Ingrese su jugada (fila,columna): "
 
 def show_table(table):
-    """ Imprime el tablero """
-    for row in table:
-        print(" | ".join(row))
-        print("-" * 9)
+    """ Imprime el tablero con las posiciones de filas y columnas """
+    print("   0   1   2")
+    for idx, row in enumerate(table):
+        print(f"{idx}  " + " | ".join(row))
+        if idx < 2:  # No imprimir el separador después de la última fila
+            print("  ---+---+---")
 
 def handle_gameplay(server):
     """ Maneja el flujo de juego """
