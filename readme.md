@@ -5,8 +5,8 @@
 
 
 1.  go run .\servidor_gato.go  
-2.  python .\servidor_intermediario.py     
-3.  python .\cliente.py     
+2.  python .\servidor_intermediario.py  // py .\servidor_intermediario.py     
+3.  python .\cliente.py                 // py .\cliente.py 
 
 
 Aparecera el menú 2 opciones:
