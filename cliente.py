@@ -35,17 +35,12 @@ def handle_gameplay(server):
                 move = input(MESSAGE_ENTER_MOVE)
                 server.sendall(f"Jugada:{move}".encode())
                 data = server.recv(1024)
-                
                 if data == b"Jugador Gana":
                     print("¡Felicidades! Ganaste.")
                     break
                 elif data == b"Robot Gana":
                     print("El robot ganó.")
                     break
-                elif data == b"Empate":
-                    print("El juego terminó en empate.")
-                    break
-                
                 table = pickle.loads(data)
                 show_table(table)
             elif option == "3":
@@ -61,36 +56,28 @@ def handle_gameplay(server):
 
 def main():
     """ Función principal del cliente """
-    while True:  # Permitir repetir el ciclo para iniciar una nueva partida sin reiniciar el cliente
-        try:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
-                server.connect((HOST, PORT))
-                print(MESSAGE_MAIN_MENU)
-                option = input("Selecciona una opción: ")
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
+            server.connect((HOST, PORT))
+            print(MESSAGE_MAIN_MENU)
+            option = input("Selecciona una opción: ")
 
-                if option == "1":
-                    server.sendall("Solicitar Partida".encode())
-                    data = server.recv(1024)
-                    if data == b"Disponibilidad:Si":
-                        print("Comienza el juego...")
-                        handle_gameplay(server)
-                    elif data == b"Servidor Gato No Disponible, Espere...":
-                        print("Servidor Gato No Disponible, Espere...")
-                    else:
-                        print("Lo siento, el juego no está disponible en este momento.")
+            if option == "1":
+                server.sendall("Solicitar Partida".encode())
+                data = server.recv(1024)
+                if data == b"Disponibilidad:Si":
+                    print("Comienza el juego...")
+                    handle_gameplay(server)
+                elif data == b"Servidor Gato No Disponible, Espere...":
+                    print("Servidor Gato No Disponible, Espere...")
                 else:
-                    print("Saliendo del juego.")
-                    break
-        except ConnectionRefusedError:
-            print("No se pudo conectar al servidor.")
-        except Exception as e:
-            print(f"Error en el cliente: {e}")
-
-        # Preguntar si el jugador quiere jugar de nuevo o salir
-        repeat = input("¿Quieres jugar otra partida? (s/n): ")
-        if repeat.lower() != "s":
-            print("Saliendo del juego.")
-            break
+                    print("Lo siento, el juego no está disponible en este momento.")
+            else:
+                print("Saliendo del juego.")
+    except ConnectionRefusedError:
+        print("No se pudo conectar al servidor.")
+    except Exception as e:
+        print(f"Error en el cliente: {e}")
 
 if __name__ == "__main__":
     main()
